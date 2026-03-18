@@ -17,12 +17,12 @@
             ["Do Exibicionismo ao Lucro:", "Quer vender (...e muito) como criadora de conteúdo adulto?"],
             ["Transforme suas fotos e vídeos em dinheiro de verdade", "Mas, não tem ideia como?"],
             
-            // A LINHA DO HERÓI QUE PRECISA DE QUEBRA DE LINHA
-            // Esta substituição foca no trecho curto e injeta o texto completo com o <br>
-            ["A TKT2Rocket gerencia seu perfil", "A TKT2ROCKET 🚀 sabe como te ajudar para voar alto. <br><br> Uma agência completa para te ajudar a ter liberdade de criação e produção e vender muito mais no Privacy, HotVips e OnlyFans para você vender conteúdo com segurança e sigilo."],
+            // SUBSTITUIÇÃO ÚNICA PARA EVITAR DUPLICIDADE
+            ["A TKT2Rocket gerencia seu perfil", "A TKT2ROCKET 🚀 sabe como te ajudar para voar alto. <br><br> Uma agência completa para te ajudar a ter liberdade de criação e produção e vender muito mais no Privacy, HotVips e OnlyFans."],
             
-            // LIMPEZA DE TEXTOS RESIDUAIS (PARA NÃO SOBRAR FRASES ABAIXO)
+            // REGRAS DE APAGAR (PARA LIMPAR AS DUPLICATAS DO EMERGENT)
             ["no Privacy, HotVips e OnlyFans para você vender conteúdo com segurança e sigilo, ganhar mais e ter liberdade para crescer.", ""],
+            ["para você vender conteúdo com segurança e sigilo, ganhar mais e ter liberdade para crescer.", ""],
             ["ganhar mais e ter liberdade para crescer.", ""],
 
             // OUTRAS DOBRAS
@@ -36,15 +36,15 @@
         ];
 
         function walk(node) {
-            if (node.nodeType === 3) { // Node de texto
+            if (node.nodeType === 3) {
                 let text = node.nodeValue;
                 translations.forEach(([old, newVal]) => {
                     if (text.includes(old)) {
-                        // Se houver tag <br>, usamos innerHTML no pai para renderizar a quebra de linha
-                        if (newVal.includes('<br>')) {
-                            node.parentNode.innerHTML = node.parentNode.innerHTML.replace(old, newVal);
+                        if (newVal === "") {
+                             node.nodeValue = ""; // Apaga o texto indesejado
+                        } else if (newVal.includes('<br>')) {
+                            node.parentNode.innerHTML = newVal; // Força apenas o novo conteúdo no container
                         } else {
-                            // Senão, substituição de texto puro (mais segura contra conflitos)
                             node.nodeValue = text.replace(old, newVal);
                         }
                     }
