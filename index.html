@@ -7,11 +7,10 @@
     <script defer="defer" src="/static/js/main.5b366446.js"></script>
     <link href="/static/css/main.333bd661.css" rel="stylesheet">
     <style>
-        /* Ajustes de Design para manter a elegância do Word */
-        #root h1 { font-family: 'Playfair Display', serif !important; font-weight: 800 !important; line-height: 1.2 !important; }
-        .hero-sub { font-family: 'Manrope', sans-serif !important; line-height: 1.6; margin-top: 15px; }
-        .stats-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: #999; }
-        .stats-value { font-family: 'Playfair Display', serif; color: #ff3b3b; font-size: 1.8rem; font-weight: 700; }
+        #root h1 { font-family: 'Playfair Display', serif !important; font-weight: 800 !important; }
+        .hero-sub { font-family: 'Manrope', sans-serif !important; line-height: 1.6; display: block; margin-top: 15px; }
+        .stats-label { font-size: 0.75rem; text-transform: uppercase; color: #999; display: block; }
+        .stats-value { font-family: 'Playfair Display', serif; color: #ff3b3b; font-size: 1.5rem; font-weight: 700; display: block; }
     </style>
 </head>
 <body>
@@ -24,31 +23,35 @@
             ["Transforme suas fotos e vídeos em dinheiro de verdade", "Mas, não tem ideia como?"],
             ["A TKT2Rocket gerencia seu perfil", "<span class='hero-sub'>A TKT2ROCKET 🚀 sabe como te ajudar para voar alto. <br><br> Uma agência completa para te ajudar a ter liberdade de criação e produção e vender muito mais no Privacy, HotVips e OnlyFans.</span>"],
             
-            // --- 2ª DOBRA: IMPACTO ---
+            // --- 2ª DOBRA: TEXTO DE APOIO E IMPACTO ---
             ["Como Funciona a Parceria", "DO EXIBICIONISMO AO LUCRO"],
-            ["Somos sócios do seu crescimento", "Aquilo que começou como uma brincadeira pode pagar muito mais que a balada do final de semana!!!"],
-            ["SEUS VÍDEOS SOBEM, MAS SEUS ASSINANTES NÃO? A gente te ensina a crescer de verdade.", "SEUS VÍDEOS SOBEM, MAS SEUS ASSINANTES NÃO? <br> Você sabe que seus vídeos são bons, mas tem poucos assinantes e não sabe como crescer?"],
+            ["Aquilo que começou como uma brincadeira pode pagar muito mais", "Aquilo que começou como uma brincadeira pode pagar muito mais que a balada do final de semana!!!"],
+            ["Você sabe que seus vídeos são bons, mas tem poucos assinantes e não sabe como crescer?", "SEUS VÍDEOS SOBEM, MAS SEUS ASSINANTES NÃO? <br> Você posta em plataformas grandes, mas tem poucos assinantes e não sabe como crescer?"],
+            ["no Privacy e HotVips — só crescemos se você crescer.", ""], // Limpeza de sobra
 
-            // --- CARDS DE SERVIÇOS ---
-            ["Gestão de Trocas de Divulgação", "01. Estratégia de Divulgação"],
-            ["Mentoria Completa", "02. Plataformas e Consultoria"],
-            ["Gestão de Redes Sociais", "03. Marketing e Gestão"],
+            // --- BOXES DE SERVIÇO (Eliminando duplicidade de números) ---
+            ["01", "01. Estratégia de Divulgação"],
+            ["Gestão de Trocas de Divulgação", ""], // Remove o título antigo para não duplicar
+            ["02", "02. Plataformas e Consultoria"],
+            ["Mentoria Completa", ""], 
+            ["03", "03. Marketing e Gestão"],
+            ["Gestão de Redes Sociais", ""],
 
-            // --- SEÇÃO 3: NÚMEROS (OS ELEMENTOS QUE FALTAVAM) ---
-            ["+25", "<span class='stats-value'>+ Faturamento</span>"],
+            // --- SEÇÃO DE RESULTADOS (NÚMEROS) ---
+            ["+25", "<span class='stats-value'>Faturamento</span>"],
             ["CRIADORAS GERENCIADAS", "<span class='stats-label'>CRESCIMENTO MÉDIO</span>"],
-            ["Top 1", "<span class='stats-value'>+ Assinantes</span>"],
-            ["RANKING DO PRIVACY", "<span class='stats-label'>JÁ NO 1º MÊS</span>"],
+            ["Top 1", "<span class='stats-value'>Assinantes</span>"],
+            ["RANKING DO PRIVACY", "<span class='stats-label'>CRESCIMENTO NO 1º MÊS</span>"],
             ["Oficial", "<span class='stats-value'>Alcance Global</span>"],
             ["PARCEIRO HOTVIPS", "<span class='stats-label'>PÓS-TKT2ROCKET</span>"]
         ];
 
         function walk(node) {
             if (node.nodeType === 3) {
-                let text = node.nodeValue;
+                let text = node.nodeValue.trim();
                 translations.forEach(([old, newVal]) => {
-                    if (text.includes(old)) {
-                        if (newVal.includes('<')) { // Se tiver HTML (como <span> ou <br>)
+                    if (text === old || text.includes(old)) {
+                        if (newVal.includes('<')) {
                             const span = document.createElement('span');
                             span.innerHTML = newVal;
                             node.parentNode.replaceChild(span, node);
