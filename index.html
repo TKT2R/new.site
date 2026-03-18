@@ -11,6 +11,8 @@
         .hero-sub { font-family: 'Manrope', sans-serif !important; line-height: 1.6; display: block; margin-top: 15px; }
         .stats-label { font-size: 0.75rem; text-transform: uppercase; color: #999; display: block; }
         .stats-value { font-family: 'Playfair Display', serif; color: #ff3b3b; font-size: 1.5rem; font-weight: 700; display: block; }
+        /* O Plus Amarelo que você pediu */
+        .plus-yellow { color: #ffcc00 !important; font-weight: 800; margin-right: 2px; }
     </style>
 </head>
 <body>
@@ -23,31 +25,36 @@
             ["Transforme suas fotos e vídeos em dinheiro de verdade", "Mas, não tem ideia como?"],
             ["A TKT2Rocket gerencia seu perfil", "<span class='hero-sub'>A TKT2ROCKET 🚀 sabe como te ajudar para voar alto. <br><br> Uma agência completa para te ajudar a ter liberdade de criação e produção e vender muito mais no Privacy, HotVips e OnlyFans.</span>"],
             
-            // --- 2ª DOBRA: TEXTO DE APOIO E IMPACTO ---
+            // --- 2ª DOBRA: IMPACTO ---
             ["Como Funciona a Parceria", "DO EXIBICIONISMO AO LUCRO"],
             ["Aquilo que começou como uma brincadeira pode pagar muito mais", "Aquilo que começou como uma brincadeira pode pagar muito mais que a balada do final de semana!!!"],
+            ["no Privacy e HotVips — só crescemos se você crescer.", ""], 
             ["Você sabe que seus vídeos são bons, mas tem poucos assinantes e não sabe como crescer?", "SEUS VÍDEOS SOBEM, MAS SEUS ASSINANTES NÃO? <br> Você posta em plataformas grandes, mas tem poucos assinantes e não sabe como crescer?"],
-            ["no Privacy e HotVips — só crescemos se você crescer.", ""], // Limpeza de sobra
 
-            // --- BOXES DE SERVIÇO (Eliminando duplicidade de números) ---
+            // --- BOXES DE SERVIÇO (Sem números duplicados) ---
             ["01", "01. Estratégia de Divulgação"],
-            ["Gestão de Trocas de Divulgação", ""], // Remove o título antigo para não duplicar
+            ["Gestão de Trocas de Divulgação", ""],
             ["02", "02. Plataformas e Consultoria"],
-            ["Mentoria Completa", ""], 
+            ["Mentoria Completa", ""],
             ["03", "03. Marketing e Gestão"],
             ["Gestão de Redes Sociais", ""],
 
-            // --- SEÇÃO DE RESULTADOS (NÚMEROS) ---
-            // Adicionamos o "+" em amarelo (classe 'plus-yellow') antes do texto
+            // --- SEÇÃO DE RESULTADOS (Com o + Amarelo) ---
             ["+25", "<span class='stats-value'><span class='plus-yellow'>+</span> Faturamento</span>"],
             ["CRIADORAS GERENCIADAS", "<span class='stats-label'>CRESCIMENTO MÉDIO</span>"],
-            ["Top 1", "<span class='stats-value'><span class='plus-yellow'>+</span> Assinantes</span>"];
+            ["Top 1", "<span class='stats-value'><span class='plus-yellow'>+</span> Assinantes</span>"],
+            ["RANKING DO PRIVACY", "<span class='stats-label'>CRESCIMENTO NO 1º MÊS</span>"],
+            ["Oficial", "<span class='stats-value'>Alcance Global</span>"],
+            ["PARCEIRO HOTVIPS", "<span class='stats-label'>PÓS-TKT2ROCKET</span>"]
+        ];
 
-        function walk(node) {
-            if (node.nodeType === 3) {
-                let text = node.nodeValue.trim();
+        function apply() {
+            const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+            let node;
+            while(node = walker.nextNode()) {
+                let text = node.nodeValue;
                 translations.forEach(([old, newVal]) => {
-                    if (text === old || text.includes(old)) {
+                    if (text.includes(old) && old !== "") {
                         if (newVal.includes('<')) {
                             const span = document.createElement('span');
                             span.innerHTML = newVal;
@@ -58,13 +65,19 @@
                     }
                 });
             }
-            for (let i = 0; i < node.childNodes.length; i++) {
-                walk(node.childNodes[i]);
-            }
         }
 
-        const observer = new MutationObserver(() => walk(document.body));
-        observer.observe(document.body, { childList: true, subtree: true });
+        // MutationObserver agressivo para impedir a reversão do React
+        const observer = new MutationObserver(() => {
+            apply();
+        });
+
+        observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+        
+        // Execução inicial e reforço após 1 e 3 segundos
+        apply();
+        setTimeout(apply, 1000);
+        setTimeout(apply, 3000);
     })();
     </script>
 </body>
