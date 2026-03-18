@@ -6,14 +6,6 @@
     <meta name="theme-color" content="#0a0a0a"/>
     <title>TKT2Rocket | Agência de Gestão para Criadoras Privacy e HotVips</title>
     <meta name="description" content="Transforme suas fotos e vídeos em lucro real. A TKT2Rocket gerencia seu perfil no Privacy, HotVips e OnlyFans para você ganhar mais e ter liberdade."/>
-    <meta name="keywords" content="agência de conteúdo adulto, como vender no privacy, gestão de hotwife, ganhar dinheiro hotvips, assessoria para criadoras, marketing adulto brasil"/>
-    <meta name="author" content="TKT2Rocket"/>
-    <meta name="robots" content="index, follow"/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:title" content="TKT2Rocket | Agência de Gestão para Criadoras Privacy e HotVips"/>
-    <meta property="og:description" content="Transforme suas fotos e vídeos em lucro real. A TKT2Rocket gerencia seu perfil no Privacy, HotVips e OnlyFans para você ganhar mais e ter liberdade."/>
-    <meta property="og:locale" content="pt_BR"/>
-    <meta property="og:site_name" content="TKT2Rocket"/>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Manrope:wght@400;700&display=swap" rel="stylesheet"/>
@@ -27,18 +19,29 @@
     
     <script>
     (function() {
+        // Mapeamento rigoroso baseado no documento "TKT2ROCKET - SITE - Estrutura_Texto.docx"
         const translations = [
-            ["Transforme suas fotos e vídeos em lucro real", "Quer vender (...e muito) como criadora de conteúdo adulto mas não tem ideia como?"],
-            ["A TKT2Rocket gerencia seu perfil", "A TKT2ROCKET 🚀 sabe como te ajudar para voar alto. Uma agência completa para te ajudar a ter liberdade de criação e produção e vender muito mais!"],
+            // HERO - Título e Subtítulo Principal
+            ["Do Exibicionismo ao Lucro:", "Quer vender (...e muito) como criadora de conteúdo adulto mas não tem ideia como?"],
+            ["Transforme suas fotos e vídeos em dinheiro de verdade", "A TKT2ROCKET 🚀 sabe como te ajudar para voar alto. Uma agência completa para te ajudar a ter liberdade de criação e produção e vender muito mais!"],
+            
+            // REMOÇÃO DE TEXTOS RESIDUAIS DO EMERGENT NO HERO
+            ["no Privacy, HotVips e OnlyFans para você vender conteúdo com segurança e sigilo, ganhar mais e ter liberdade para crescer.", ""],
+            
+            // SEÇÃO DE IMPACTO (Onde estava o "Aquilo que começou...")
             ["Aquilo que começou como uma brincadeira", "DO EXIBICIONISMO AO LUCRO: Aquilo que começou como uma brincadeira pode pagar muito mais que a balada do final de semana!!!"],
+            
+            // DOR E PARCERIA
             ["Seus vídeos sobem, mas seus assinantes não", "SEUS VÍDEOS SOBEM, MAS SEUS ASSINANTES NÃO?"],
             ["Somos sócios do seu crescimento", "Somos sócios do seu crescimento — só crescemos se você crescer. UMA PARCERIA REAL."],
+            
+            // QUEM SOMOS E NICHO
             ["Quem Somos", "QUEM SOMOS: Agência há 3 anos no mercado, focada no nicho hotwife/cuckold. Parceira oficial Hotvips."],
             ["Pague a TKT2ROCKET somente com o que trouxermos de Crescimento", "Pague a TKT2ROCKET somente com o que trouxermos de Crescimento. Se você já é criadora, sua receita média é garantida."]
         ];
 
         function walk(node) {
-            if (node.nodeType === 3) { // Node de texto
+            if (node.nodeType === 3) {
                 let text = node.nodeValue;
                 translations.forEach(([old, newVal]) => {
                     if (text.includes(old)) {
