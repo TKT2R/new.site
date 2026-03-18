@@ -38,13 +38,10 @@
             ["Gestão de Redes Sociais", ""],
 
             // --- SEÇÃO DE RESULTADOS (NÚMEROS) ---
-            ["+25", "<span class='stats-value'>Faturamento</span>"],
+            // Adicionamos o "+" em amarelo (classe 'plus-yellow') antes do texto
+            ["+25", "<span class='stats-value'><span class='plus-yellow'>+</span> Faturamento</span>"],
             ["CRIADORAS GERENCIADAS", "<span class='stats-label'>CRESCIMENTO MÉDIO</span>"],
-            ["Top 1", "<span class='stats-value'>Assinantes</span>"],
-            ["RANKING DO PRIVACY", "<span class='stats-label'>CRESCIMENTO NO 1º MÊS</span>"],
-            ["Oficial", "<span class='stats-value'>Alcance Global</span>"],
-            ["PARCEIRO HOTVIPS", "<span class='stats-label'>PÓS-TKT2ROCKET</span>"]
-        ];
+            ["Top 1", "<span class='stats-value'><span class='plus-yellow'>+</span> Assinantes</span>"];
 
         function walk(node) {
             if (node.nodeType === 3) {
