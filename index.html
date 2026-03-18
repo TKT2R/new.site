@@ -1,61 +1,53 @@
-<script>
-(function() {
-    const translations = [
-        // 1ª DOBRA: HERO (TÍTULO E SUBTÍTULO COM QUEBRA)
-        ["Do Exibicionismo ao Lucro:", "Quer vender (...e muito) como criadora de conteúdo adulto?"],
-        ["Transforme suas fotos e vídeos em dinheiro de verdade", "Mas, não tem ideia como?"],
-        ["A TKT2Rocket gerencia seu perfil no Privacy, HotVips e OnlyFans para você ganhar mais e ter liberdade.", "A TKT2ROCKET 🚀 sabe como te ajudar para voar alto. <br><br> Uma agência completa para te ajudar a ter liberdade de criação e produção e vender muito mais!"],
-        ["no Privacy, HotVips e OnlyFans para você vender conteúdo com segurança e sigilo, ganhar mais e ter liberdade para crescer.", ""],
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5"/>
+    <title>TKT2Rocket | Agência de Gestão para Criadoras</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Manrope:wght@400;700&display=swap" rel="stylesheet"/>
+    <script defer="defer" src="/static/js/main.5b366446.js"></script>
+    <link href="/static/css/main.333bd661.css" rel="stylesheet">
+</head>
+<body>
+    <div id="root"></div>
+    <script>
+    (function() {
+        const translations = [
+            ["Do Exibicionismo ao Lucro:", "Quer vender (...e muito) como criadora de conteúdo adulto?"],
+            ["Transforme suas fotos e vídeos em dinheiro de verdade", "Mas, não tem ideia como?"],
+            ["A TKT2Rocket gerencia seu perfil no Privacy, HotVips e OnlyFans para você ganhar mais e ter liberdade.", "A TKT2ROCKET 🚀 sabe como te ajudar para voar alto. Uma agência completa para te ajudar a ter liberdade e vender muito mais!"],
+            ["no Privacy, HotVips e OnlyFans para você vender conteúdo com segurança e sigilo, ganhar mais e ter liberdade para crescer.", ""],
+            ["Aquilo que começou como uma brincadeira", "DO EXIBICIONISMO AO LUCRO: Aquilo que começou como uma brincadeira pode pagar muito mais que a balada!"],
+            ["Seus vídeos sobem, mas seus assinantes não", "SEUS VÍDEOS SOBEM, MAS SEUS ASSINANTES NÃO?"],
+            ["Somos sócios do seu crescimento", "Você sabe que seus vídeos são bons, mas tem poucos assinantes e não sabe como crescer?"],
+            ["O que oferecemos", "UMA PARCERIA REAL"],
+            ["Quem Somos", "QUEM SOMOS?"],
+            ["Gerenciamos perfis e cuidamos de toda a estratégia", "Agência há 3 anos no mercado, destaque no nicho hotwife/cuckold. Hoje gerenciamos cerca de 30 criadoras."],
+            ["Gestão de Perfil", "01. Plataformas"],
+            ["Marketing Estratégico", "02. Redes Sociais"],
+            ["Criação de Conteúdo", "03. Divulgações"],
+            ["Análise de Dados", "04. Consultoria"],
+            ["Suporte 24/7", "05. Gestão"],
+            ["Pague a TKT2ROCKET somente com o que trouxermos de Crescimento", "Pague a TKT2ROCKET somente com o que trouxermos de crescimento. Sua receita média é garantida."]
+        ];
 
-        // 2ª DOBRA: IMPACTO E DOR
-        ["Aquilo que começou como uma brincadeira", "DO EXIBICIONISMO AO LUCRO: Aquilo que começou como uma brincadeira, um passatempo compartilhado, pode pagar muito mais que a balada do final de semana!!!"],
-        ["Seus vídeos sobem, mas seus assinantes não", "SEUS VÍDEOS SOBEM, MAS SEUS ASSINANTES NÃO?"],
-        ["Somos sócios do seu crescimento", "Você sabe que seus vídeos são muito bons, posta em plataformas grandes, mas tem poucos assinantes e não sabe como crescer?"],
-
-        // 3ª DOBRA: PROPOSTA DE VALOR
-        ["O que oferecemos", "UMA PARCERIA REAL"],
-
-        // 4ª DOBRA: QUEM SOMOS (DIVIDIDO EM PARÁGRAFOS)
-        ["Quem Somos", "QUEM SOMOS?"],
-        ["Gerenciamos perfis e cuidamos de toda a estratégia", "Uma agência que está há 3 anos no mercado, idealizada por criadores que iniciaram em 2022 e têm destaque no nicho hotwife/cuckold.<br><br>Conhecedores da economia criativa junto a profissionais referência em comunicação, marketing de influência e gestão de redes.<br><br>Hoje gerenciamos cerca de 30 criadoras, com tecnologia própria e experiência em diversos nichos, especialmente hotwife."],
-
-        // AJUSTE DE SERVIÇOS (Sugestão para alinhar com o Word 01-05)
-        ["Gestão de Perfil", "01. Funcionamento das Plataformas"],
-        ["Marketing Estratégico", "02. Gestão de Redes Sociais"],
-        ["Criação de Conteúdo", "03. Divulgações e Tráfego"],
-        ["Análise de Dados", "04. Consultoria de Vendas"],
-        ["Suporte 24/7", "05. Gestão e Comunicação"],
-
-        // RODAPÉ / GARANTIA
-        ["Pague a TKT2ROCKET somente com o que trouxermos de Crescimento", "Pague a TKT2ROCKET somente com o que trouxermos de crescimento. Se você já é criadora, sua receita média é garantida."]
-    ];
-
-    function walk(node) {
-        if (node.nodeType === 3) {
-            let text = node.nodeValue;
-            translations.forEach(([old, newVal]) => {
-                if (text.includes(old)) {
-                    // Usamos innerHTML no pai se houver tags <br>, senão nodeValue
-                    if (newVal.includes('<br>')) {
-                        node.parentNode.innerHTML = node.parentNode.innerHTML.replace(old, newVal);
-                    } else {
+        function walk(node) {
+            if (node.nodeType === 3) {
+                let text = node.nodeValue;
+                translations.forEach(([old, newVal]) => {
+                    if (text.includes(old)) {
                         node.nodeValue = text.replace(old, newVal);
                     }
-                }
-            });
+                });
+            }
+            for (let i = 0; i < node.childNodes.length; i++) {
+                walk(node.childNodes[i]);
+            }
         }
-        for (let i = 0; i < node.childNodes.length; i++) {
-            walk(node.childNodes[i]);
-        }
-    }
 
-    const observer = new MutationObserver(() => {
-        walk(document.body);
-        // Remover logos residuais de parceiros se houver seção de logos genérica
-        const logosection = document.querySelector('.partners-logos'); 
-        if(logosection) logosection.style.display = 'none';
-    });
-
-    observer.observe(document.body, { childList: true, subtree: true });
-})();
-</script>
+        const observer = new MutationObserver(() => walk(document.body));
+        observer.observe(document.body, { childList: true, subtree: true });
+    })();
+    </script>
+</body>
+</html>
