@@ -3,10 +3,16 @@
 <head>
     <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5"/>
     <title>TKT2Rocket | Agência de Gestão para Criadoras</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Manrope:wght@400;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet"/>
     <script defer="defer" src="/static/js/main.5b366446.js"></script>
     <link href="/static/css/main.333bd661.css" rel="stylesheet">
+    <style>
+        /* Ajustes de Design para manter a elegância do Word */
+        #root h1 { font-family: 'Playfair Display', serif !important; font-weight: 800 !important; line-height: 1.2 !important; }
+        .hero-sub { font-family: 'Manrope', sans-serif !important; line-height: 1.6; margin-top: 15px; }
+        .stats-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: #999; }
+        .stats-value { font-family: 'Playfair Display', serif; color: #ff3b3b; font-size: 1.8rem; font-weight: 700; }
+    </style>
 </head>
 <body>
     <div id="root"></div>
@@ -16,32 +22,25 @@
             // --- 1ª DOBRA: HERO ---
             ["Do Exibicionismo ao Lucro:", "Quer vender (...e muito) como criadora de conteúdo adulto?"],
             ["Transforme suas fotos e vídeos em dinheiro de verdade", "Mas, não tem ideia como?"],
-            ["A TKT2Rocket gerencia seu perfil", "A TKT2ROCKET 🚀 sabe como te ajudar para voar alto. <br><br> Uma agência completa para te ajudar a ter liberdade de criação e produção e vender muito mais no Privacy, HotVips e OnlyFans."],
-            ["no Privacy, HotVips e OnlyFans para você vender conteúdo com segurança e sigilo, ganhar mais e ter liberdade para crescer.", ""],
-            ["para você vender conteúdo com segurança e sigilo, ganhar mais e ter liberdade para crescer.", ""],
-
+            ["A TKT2Rocket gerencia seu perfil", "<span class='hero-sub'>A TKT2ROCKET 🚀 sabe como te ajudar para voar alto. <br><br> Uma agência completa para te ajudar a ter liberdade de criação e produção e vender muito mais no Privacy, HotVips e OnlyFans.</span>"],
+            
             // --- 2ª DOBRA: IMPACTO ---
             ["Como Funciona a Parceria", "DO EXIBICIONISMO AO LUCRO"],
-            ["Você sabe que seus vídeos são bons", "Aquilo que começou como uma brincadeira pode pagar muito mais que a balada do final de semana!!!"],
-            ["no Privacy e HotVips — só crescemos se você crescer.", "SEUS VÍDEOS SOBEM, MAS SEUS ASSINANTES NÃO? A gente te ensina a crescer de verdade."],
+            ["Somos sócios do seu crescimento", "Aquilo que começou como uma brincadeira pode pagar muito mais que a balada do final de semana!!!"],
+            ["SEUS VÍDEOS SOBEM, MAS SEUS ASSINANTES NÃO? A gente te ensina a crescer de verdade.", "SEUS VÍDEOS SOBEM, MAS SEUS ASSINANTES NÃO? <br> Você sabe que seus vídeos são bons, mas tem poucos assinantes e não sabe como crescer?"],
 
-            // --- CARDS DE SERVIÇOS (ENCAIXE DO WORD) ---
-            ["Gestão de Trocas de Divulgação", "Estratégia de Divulgação"],
-            ["Você entra numa rede de mais de 25 perfis parceiros", "Rede exclusiva com mais de 30 perfis parceiros e estratégias de divulgações em diversos canais."],
-            ["Mentoria Completa", "Plataformas e Consultoria"],
-            ["Do zero ao avançado. Como abrir plataformas", "Funcionamento técnico das principais plataformas adultas e consultoria de marketing e vendas."],
-            ["Gestão de Redes Sociais", "Marketing e Gestão"],
-            ["Criamos e gerenciamos múltiplas contas", "Gestão profissional de redes sociais com foco em comunicação e psicologia comercial para conversão."],
+            // --- CARDS DE SERVIÇOS ---
+            ["Gestão de Trocas de Divulgação", "01. Estratégia de Divulgação"],
+            ["Mentoria Completa", "02. Plataformas e Consultoria"],
+            ["Gestão de Redes Sociais", "03. Marketing e Gestão"],
 
-            // --- NÚMEROS / ESTATÍSTICAS ---
-            ["CRIADORAS GERENCIADAS", "CRESCIMENTO NO 1º MÊS"],
-            ["RANKING DO PRIVACY", "MÉDIA DE FATURAMENTO"],
-            ["PARCEIRO HOTVIPS", "ASSINANTES PÓS-TKT2ROCKET"],
-
-            // --- QUEM SOMOS E GARANTIA ---
-            ["Quem Somos", "QUEM SOMOS?"],
-            ["Gerenciamos perfis e cuidamos de toda a estratégia", "Agência há 3 anos no mercado, destaque no nicho hotwife/cuckold. Hoje gerenciamos cerca de 30 criadoras."],
-            ["Pague a TKT2ROCKET somente com o que trouxermos de Crescimento", "Pague a TKT2ROCKET somente com o que trouxermos de crescimento. Sua receita média é garantida."]
+            // --- SEÇÃO 3: NÚMEROS (OS ELEMENTOS QUE FALTAVAM) ---
+            ["+25", "<span class='stats-value'>+ Faturamento</span>"],
+            ["CRIADORAS GERENCIADAS", "<span class='stats-label'>CRESCIMENTO MÉDIO</span>"],
+            ["Top 1", "<span class='stats-value'>+ Assinantes</span>"],
+            ["RANKING DO PRIVACY", "<span class='stats-label'>JÁ NO 1º MÊS</span>"],
+            ["Oficial", "<span class='stats-value'>Alcance Global</span>"],
+            ["PARCEIRO HOTVIPS", "<span class='stats-label'>PÓS-TKT2ROCKET</span>"]
         ];
 
         function walk(node) {
@@ -49,10 +48,10 @@
                 let text = node.nodeValue;
                 translations.forEach(([old, newVal]) => {
                     if (text.includes(old)) {
-                        if (newVal === "") {
-                             node.nodeValue = ""; 
-                        } else if (newVal.includes('<br>')) {
-                            node.parentNode.innerHTML = newVal; 
+                        if (newVal.includes('<')) { // Se tiver HTML (como <span> ou <br>)
+                            const span = document.createElement('span');
+                            span.innerHTML = newVal;
+                            node.parentNode.replaceChild(span, node);
                         } else {
                             node.nodeValue = text.replace(old, newVal);
                         }
