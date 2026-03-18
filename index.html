@@ -13,23 +13,32 @@
     <script>
     (function() {
         const translations = [
-            // HERO - TÍTULO E SUBTÍTULO
+            // --- 1ª DOBRA: HERO ---
             ["Do Exibicionismo ao Lucro:", "Quer vender (...e muito) como criadora de conteúdo adulto?"],
             ["Transforme suas fotos e vídeos em dinheiro de verdade", "Mas, não tem ideia como?"],
-            
-            // SUBSTITUIÇÃO ÚNICA PARA EVITAR DUPLICIDADE
             ["A TKT2Rocket gerencia seu perfil", "A TKT2ROCKET 🚀 sabe como te ajudar para voar alto. <br><br> Uma agência completa para te ajudar a ter liberdade de criação e produção e vender muito mais no Privacy, HotVips e OnlyFans."],
-            
-            // REGRAS DE APAGAR (PARA LIMPAR AS DUPLICATAS DO EMERGENT)
             ["no Privacy, HotVips e OnlyFans para você vender conteúdo com segurança e sigilo, ganhar mais e ter liberdade para crescer.", ""],
             ["para você vender conteúdo com segurança e sigilo, ganhar mais e ter liberdade para crescer.", ""],
-            ["ganhar mais e ter liberdade para crescer.", ""],
 
-            // OUTRAS DOBRAS
-            ["Aquilo que começou como uma brincadeira", "DO EXIBICIONISMO AO LUCRO: Aquilo que começou como uma brincadeira pode pagar muito mais que a balada!"],
-            ["Seus vídeos sobem, mas seus assinantes não", "SEUS VÍDEOS SOBEM, MAS SEUS ASSINANTES NÃO?"],
-            ["Somos sócios do seu crescimento", "Você sabe que seus vídeos são bons, mas tem poucos assinantes e não sabe como crescer?"],
-            ["O que oferecemos", "UMA PARCERIA REAL"],
+            // --- 2ª DOBRA: IMPACTO ---
+            ["Como Funciona a Parceria", "DO EXIBICIONISMO AO LUCRO"],
+            ["Você sabe que seus vídeos são bons", "Aquilo que começou como uma brincadeira pode pagar muito mais que a balada do final de semana!!!"],
+            ["no Privacy e HotVips — só crescemos se você crescer.", "SEUS VÍDEOS SOBEM, MAS SEUS ASSINANTES NÃO? A gente te ensina a crescer de verdade."],
+
+            // --- CARDS DE SERVIÇOS (ENCAIXE DO WORD) ---
+            ["Gestão de Trocas de Divulgação", "Estratégia de Divulgação"],
+            ["Você entra numa rede de mais de 25 perfis parceiros", "Rede exclusiva com mais de 30 perfis parceiros e estratégias de divulgações em diversos canais."],
+            ["Mentoria Completa", "Plataformas e Consultoria"],
+            ["Do zero ao avançado. Como abrir plataformas", "Funcionamento técnico das principais plataformas adultas e consultoria de marketing e vendas."],
+            ["Gestão de Redes Sociais", "Marketing e Gestão"],
+            ["Criamos e gerenciamos múltiplas contas", "Gestão profissional de redes sociais com foco em comunicação e psicologia comercial para conversão."],
+
+            // --- NÚMEROS / ESTATÍSTICAS ---
+            ["CRIADORAS GERENCIADAS", "CRESCIMENTO NO 1º MÊS"],
+            ["RANKING DO PRIVACY", "MÉDIA DE FATURAMENTO"],
+            ["PARCEIRO HOTVIPS", "ASSINANTES PÓS-TKT2ROCKET"],
+
+            // --- QUEM SOMOS E GARANTIA ---
             ["Quem Somos", "QUEM SOMOS?"],
             ["Gerenciamos perfis e cuidamos de toda a estratégia", "Agência há 3 anos no mercado, destaque no nicho hotwife/cuckold. Hoje gerenciamos cerca de 30 criadoras."],
             ["Pague a TKT2ROCKET somente com o que trouxermos de Crescimento", "Pague a TKT2ROCKET somente com o que trouxermos de crescimento. Sua receita média é garantida."]
@@ -41,9 +50,9 @@
                 translations.forEach(([old, newVal]) => {
                     if (text.includes(old)) {
                         if (newVal === "") {
-                             node.nodeValue = ""; // Apaga o texto indesejado
+                             node.nodeValue = ""; 
                         } else if (newVal.includes('<br>')) {
-                            node.parentNode.innerHTML = newVal; // Força apenas o novo conteúdo no container
+                            node.parentNode.innerHTML = newVal; 
                         } else {
                             node.nodeValue = text.replace(old, newVal);
                         }
