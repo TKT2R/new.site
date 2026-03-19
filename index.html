@@ -1,91 +1,22 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-    <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5"/>
+    <meta charset="utf-8"/>
+    <link rel="icon" href="/favicon.ico"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5"/>
+    <meta name="theme-color" content="#000000"/>
+    <meta name="description" content="TKT2Rocket - Agência de Gestão para Criadoras de Conteúdo"/>
+    <link rel="apple-touch-icon" href="/logo192.png"/>
+    <link rel="manifest" href="/manifest.json"/>
     <title>TKT2Rocket | Agência de Gestão para Criadoras</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Manrope:wght@400;700&display=swap" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet"/>
     <script defer="defer" src="/static/js/main.5b366446.js"></script>
     <link href="/static/css/main.333bd661.css" rel="stylesheet">
-    <style>
-        #root h1 { font-family: 'Playfair Display', serif !important; font-weight: 800 !important; }
-        .hero-sub { font-family: 'Manrope', sans-serif !important; line-height: 1.6; display: block; margin-top: 15px; }
-        .stats-label { font-size: 0.75rem !important; text-transform: uppercase !important; color: #999 !important; display: block; }
-        .stats-value { font-family: 'Playfair Display', serif !important; color: #ff3b3b !important; font-size: 1.4rem !important; font-weight: 700 !important; display: block; }
-        .plus-yellow { color: #ffcc00 !important; font-weight: 800; margin-right: 4px; }
-        
-        /* Design dos Boxes */
-        .box-number { color: #c5a059 !important; font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; display: block; line-height: 1; }
-        .box-title { font-family: 'Playfair Display', serif !important; color: #fff !important; font-size: 1.2rem !important; font-weight: 700; display: block; margin-top: 8px; line-height: 1.2; }
-    </style>
 </head>
 <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <script>
-    (function() {
-        const boxes = {
-            "01": "Estratégia de Divulgação",
-            "02": "Plataformas e Consultoria",
-            "03": "Marketing e Gestão"
-        };
-
-        const stats = {
-            "+25": { val: "Faturamento", lab: "CRESCIMENTO MÉDIO" },
-            "Top 1": { val: "Assinantes", lab: "CRESCIMENTO NO 1º MÊS" }
-        };
-
-        function apply() {
-            const root = document.getElementById('root');
-            if (!root) return;
-
-            // 1. Boxes - Trava por ID para evitar linhas infinitas
-            Object.keys(boxes).forEach(num => {
-                const elements = Array.from(document.querySelectorAll('p, span, h3')).filter(el => el.textContent.trim() === num);
-                elements.forEach(el => {
-                    // SÓ ENTRA SE o pai não tiver a marca 'data-tkt-ready'
-                    if (!el.parentNode.hasAttribute('data-tkt-ready')) {
-                        el.parentNode.setAttribute('data-tkt-ready', 'true'); // MARCA O BOX COMO FINALIZADO
-                        el.style.display = 'none'; 
-                        const div = document.createElement('div');
-                        div.innerHTML = `<span class='box-number'>${num}</span><span class='box-title'>${boxes[num]}</span>`;
-                        el.parentNode.appendChild(div);
-                    }
-                });
-            });
-
-            // 2. Estatísticas - Mesma trava
-            Object.keys(stats).forEach(key => {
-                const elements = Array.from(document.querySelectorAll('p, span')).filter(el => el.textContent.trim() === key);
-                elements.forEach(el => {
-                    if (!el.parentNode.hasAttribute('data-tkt-stats')) {
-                        el.parentNode.setAttribute('data-tkt-stats', 'true');
-                        el.style.display = 'none';
-                        const div = document.createElement('div');
-                        div.innerHTML = `<span class='stats-value'><span class='plus-yellow'>+</span> ${stats[key].val}</span><span class='stats-label'>${stats[key].lab}</span>`;
-                        el.parentNode.appendChild(div);
-                    }
-                });
-            });
-
-            // 3. Hero (Troca simples de texto sem injeção de div para evitar quebra)
-            const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
-            let node;
-            while(node = walker.nextNode()) {
-                if (node.nodeValue.includes("Do Exibicionismo ao Lucro:")) {
-                    node.nodeValue = "Quer vender (...e muito) como criadora de conteúdo adulto?";
-                }
-                if (node.nodeValue.includes("A TKT2Rocket gerencia seu perfil")) {
-                    const span = document.createElement('span');
-                    span.className = 'hero-sub';
-                    span.innerHTML = "A TKT2ROCKET 🚀 sabe como te ajudar para voar alto. <br><br> Uma agência completa para te ajudar a ter liberdade e vender muito mais!";
-                    node.parentNode.replaceChild(span, node);
-                }
-            }
-        }
-
-        // Aumentamos o tempo para 2 segundos para o celular respirar
-        setInterval(apply, 2000);
-        window.addEventListener('load', apply);
-    })();
-    </script>
 </body>
 </html>
