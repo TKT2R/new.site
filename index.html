@@ -3,53 +3,34 @@
 <head>
     <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5"/>
     <title>TKT2Rocket | Agência de Gestão para Criadoras</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Manrope:wght@400;700&display=swap" rel="stylesheet"/>
-    <script defer="defer" src="/static/js/main.5b366446.js"></script>
     <link href="/static/css/main.333bd661.css" rel="stylesheet">
-    
+    <script defer="defer" src="/static/js/main.5b366446.js"></script>
     <style>
-        /* 1. RESET DE SEGURANÇA */
-        #root { opacity: 1 !important; visibility: visible !important; }
-
-        /* 2. SUBSTITUIÇÃO VIA CSS (MÉTODO OCULTO) */
-        /* Hero Título */
-        h1:has(span) span, h1 { font-size: 0 !important; }
-        h1:after { 
-            content: "Quer vender (...e muito) como criadora de conteúdo adulto?"; 
-            font-size: 3rem; font-family: 'Playfair Display', serif; display: block; visibility: visible;
-        }
-
-        /* Hero Subtítulo */
-        h1 + p { font-size: 0 !important; }
-        h1 + p:after { 
-            content: "Mas, não tem ideia como? \A\A A TKT2ROCKET 🚀 sabe como te ajudar para voar alto. Uma agência completa para te ajudar a ter liberdade e vender muito mais!"; 
-            font-size: 1.1rem; font-family: 'Manrope', sans-serif; display: block; white-space: pre-wrap; visibility: visible; line-height: 1.6;
-        }
-
-        /* Destaques (Faturamento e Assinantes) */
-        .stats-value { font-size: 0 !important; }
-        .stats-value:before { content: "+"; color: #ffcc00; margin-right: 5px; font-size: 1.5rem; }
-        
-        div:has(> p:contains("+25")) .stats-value:after { content: "Faturamento"; font-size: 1.5rem; color: #ff3b3b; }
-        div:has(> p:contains("Top 1")) .stats-value:after { content: "Assinantes"; font-size: 1.5rem; color: #ff3b3b; }
-
-        /* Esconder o que não deve aparecer */
-        p:contains("no Privacy, HotVips e OnlyFans"), 
-        p:contains("ganhar mais e ter liberdade") { display: none !important; }
-
-        /* Responsividade básica */
-        @media (max-width: 768px) {
-            h1:after { font-size: 2rem; }
-        }
+        .plus-yellow { color: #ffcc00 !important; font-weight: bold; }
+        .stats-value { color: #ff3b3b !important; font-weight: bold; }
     </style>
 </head>
 <body>
     <div id="root"></div>
     <script>
-        // Script ultra-leve apenas para garantir que o React não "limpe" o CSS
-        window.addEventListener('load', function() {
-            document.body.style.display = 'block';
-        });
+        // Função simples de troca
+        function fix() {
+            const root = document.getElementById('root');
+            if(!root) return;
+            
+            let html = root.innerHTML;
+            if (html.includes("Do Exibicionismo ao Lucro") && !html.includes("Quer vender")) {
+                html = html.replace("Do Exibicionismo ao Lucro:", "Quer vender (...e muito) como criadora de conteúdo adulto?");
+                html = html.replace("+25", "<span class='plus-yellow'>+</span> Faturamento");
+                html = html.replace("Top 1", "<span class='plus-yellow'>+</span> Assinantes");
+                root.innerHTML = html;
+            }
+        }
+
+        // Tenta trocar apenas 3 vezes, com intervalos longos, para não travar o processador
+        setTimeout(fix, 3000);
+        setTimeout(fix, 6000);
+        setTimeout(fix, 9000);
     </script>
 </body>
 </html>
