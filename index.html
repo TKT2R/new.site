@@ -6,31 +6,28 @@
     <link href="/static/css/main.333bd661.css" rel="stylesheet">
     <script defer="defer" src="/static/js/main.5b366446.js"></script>
     <style>
+        /* Apenas CSS para as cores, sem scripts para não travar */
         .plus-yellow { color: #ffcc00 !important; font-weight: bold; }
-        .stats-value { color: #ff3b3b !important; font-weight: bold; }
     </style>
 </head>
 <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    
     <script>
-        // Função simples de troca
-        function fix() {
-            const root = document.getElementById('root');
-            if(!root) return;
-            
-            let html = root.innerHTML;
-            if (html.includes("Do Exibicionismo ao Lucro") && !html.includes("Quer vender")) {
-                html = html.replace("Do Exibicionismo ao Lucro:", "Quer vender (...e muito) como criadora de conteúdo adulto?");
-                html = html.replace("+25", "<span class='plus-yellow'>+</span> Faturamento");
-                html = html.replace("Top 1", "<span class='plus-yellow'>+</span> Assinantes");
-                root.innerHTML = html;
-            }
-        }
-
-        // Tenta trocar apenas 3 vezes, com intervalos longos, para não travar o processador
-        setTimeout(fix, 3000);
-        setTimeout(fix, 6000);
-        setTimeout(fix, 9000);
+        // Este script só roda DEPOIS que tudo estiver carregado e parado
+        window.addEventListener('load', function() {
+            console.log('Site carregado. Iniciando troca única.');
+            setTimeout(function() {
+                const el = document.getElementById('root');
+                if (el) {
+                    el.innerHTML = el.innerHTML
+                        .replace(/Do Exibicionismo ao Lucro:/g, "Quer vender (...e muito) como criadora de conteúdo adulto?")
+                        .replace(/\+25/g, "<span class='plus-yellow'>+</span> Faturamento")
+                        .replace(/Top 1/g, "<span class='plus-yellow'>+</span> Assinantes");
+                }
+            }, 5000); // Espera 5 segundos inteiros antes de tocar no código
+        });
     </script>
 </body>
 </html>
