@@ -7,11 +7,18 @@
     <script defer="defer" src="/static/js/main.5b366446.js"></script>
     <link href="/static/css/main.333bd661.css" rel="stylesheet">
     <style>
+        /* Tipografia Base */
         #root h1 { font-family: 'Playfair Display', serif !important; font-weight: 800 !important; }
         .hero-sub { font-family: 'Manrope', sans-serif !important; line-height: 1.6; display: block; margin-top: 15px; }
+        
+        /* Resultados (Seção 3) */
         .stats-label { font-size: 0.75rem; text-transform: uppercase; color: #999; display: block; }
         .stats-value { font-family: 'Playfair Display', serif; color: #ff3b3b; font-size: 1.5rem; font-weight: 700; display: block; }
         .plus-yellow { color: #ffcc00 !important; font-weight: 800; margin-right: 2px; }
+
+        /* Estilização dos Boxes (Seção 2) */
+        .box-number { color: #c5a059 !important; font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; display: block; margin-bottom: 5px; }
+        .box-title { font-family: 'Playfair Display', serif !important; color: #fff !important; font-size: 1.4rem !important; font-weight: 700; display: block; margin-bottom: 15px; }
     </style>
 </head>
 <body>
@@ -19,27 +26,41 @@
     <script>
     (function() {
         const translations = [
+            // --- HERO ---
             ["Do Exibicionismo ao Lucro:", "Quer vender (...e muito) como criadora de conteúdo adulto?"],
             ["Transforme suas fotos e vídeos em dinheiro de verdade", "Mas, não tem ideia como?"],
             ["A TKT2Rocket gerencia seu perfil", "<span class='hero-sub'>A TKT2ROCKET 🚀 sabe como te ajudar para voar alto. <br><br> Uma agência completa para te ajudar a ter liberdade de criação e produção e vender muito mais no Privacy, HotVips e OnlyFans.</span>"],
+            
+            // --- SEÇÃO 2: IMPACTO ---
             ["Como Funciona a Parceria", "DO EXIBICIONISMO AO LUCRO"],
+            ["Somos sócios do seu crescimento", "Somos sócios do seu crescimento. <br> Só crescemos se você crescer."],
             ["Aquilo que começou como uma brincadeira pode pagar muito mais", "Aquilo que começou como uma brincadeira pode pagar muito mais que a balada do final de semana!!!"],
-            ["01", "01. Estratégia de Divulgação"],
-            ["02", "02. Plataformas e Consultoria"],
-            ["03", "03. Marketing e Gestão"],
+
+            // --- BOXES DE SERVIÇO (REFORMULADOS) ---
+            ["01", "<span class='box-number'>01</span><span class='box-title'>Estratégia de Divulgação</span>"],
+            ["Gestão de Trocas de Divulgação", ""], 
+            ["02", "<span class='box-number'>02</span><span class='box-title'>Plataformas e Consultoria</span>"],
+            ["Mentoria Completa", ""],
+            ["03", "<span class='box-number'>03</span><span class='box-title'>Marketing e Gestão</span>"],
+            ["Gestão de Redes Sociais", ""],
+
+            // --- SEÇÃO 3: NÚMEROS ---
             ["+25", "<span class='stats-value'><span class='plus-yellow'>+</span> Faturamento</span>"],
             ["Top 1", "<span class='stats-value'><span class='plus-yellow'>+</span> Assinantes</span>"],
             ["CRIADORAS GERENCIADAS", "CRESCIMENTO MÉDIO"],
-            ["RANKING DO PRIVACY", "CRESCIMENTO NO 1º MÊS"]
+            ["RANKING DO PRIVACY", "CRESCIMENTO NO 1º MÊS"],
+            ["Oficial", "<span class='stats-value'>Alcance Global</span>"]
         ];
 
         function apply() {
-            const walker = document.createTreeWalker(document.getElementById('root') || document.body, NodeFilter.SHOW_TEXT, null, false);
+            const root = document.getElementById('root');
+            if (!root) return;
+            const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
             let node;
             while(node = walker.nextNode()) {
                 let text = node.nodeValue;
                 translations.forEach(([old, newVal]) => {
-                    if (text.includes(old) && !text.includes(newVal.substring(0, 5))) {
+                    if (text.includes(old) && !text.includes(newVal.substring(0, 10))) {
                         if (newVal.includes('<')) {
                             const span = document.createElement('span');
                             span.innerHTML = newVal;
@@ -52,17 +73,13 @@
             }
         }
 
-        // Técnica de sincronização suave com o navegador
         function sync() {
             apply();
             requestAnimationFrame(sync);
         }
 
-        // Inicia a sincronização após o carregamento inicial
         window.addEventListener('load', () => {
-            setTimeout(() => {
-                requestAnimationFrame(sync);
-            }, 1000);
+            setTimeout(() => requestAnimationFrame(sync), 1000);
         });
     })();
     </script>
