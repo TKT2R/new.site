@@ -3,43 +3,68 @@
 <head>
     <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5"/>
     <title>TKT2Rocket | Agência de Gestão para Criadoras</title>
-    <link href="/static/css/main.333bd661.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet"/>
     <script defer="defer" src="/static/js/main.5b366446.js"></script>
+    <link href="/static/css/main.333bd661.css" rel="stylesheet">
     <style>
-        .plus-yellow { color: #ffcc00 !important; font-weight: bold; margin-right: 4px; }
-        .stats-value { color: #ff3b3b !important; font-weight: bold; }
+        #root h1 { font-family: 'Playfair Display', serif !important; font-weight: 800 !important; }
+        .hero-sub { font-family: 'Manrope', sans-serif !important; line-height: 1.6; display: block; margin-top: 15px; }
+        .stats-label { font-size: 0.75rem; text-transform: uppercase; color: #999; display: block; }
+        .stats-value { font-family: 'Playfair Display', serif; color: #ff3b3b; font-size: 1.5rem; font-weight: 700; display: block; }
+        .plus-yellow { color: #ffcc00 !important; font-weight: 800; margin-right: 2px; }
     </style>
 </head>
 <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    
     <script>
-        window.addEventListener('load', function() {
-            // Espera 3 segundos para garantir que o React terminou de renderizar tudo
-            setTimeout(function() {
-                const root = document.getElementById('root');
-                if (!root) return;
+    (function() {
+        const translations = [
+            ["Do Exibicionismo ao Lucro:", "Quer vender (...e muito) como criadora de conteúdo adulto?"],
+            ["Transforme suas fotos e vídeos em dinheiro de verdade", "Mas, não tem ideia como?"],
+            ["A TKT2Rocket gerencia seu perfil", "<span class='hero-sub'>A TKT2ROCKET 🚀 sabe como te ajudar para voar alto. <br><br> Uma agência completa para te ajudar a ter liberdade de criação e produção e vender muito mais no Privacy, HotVips e OnlyFans.</span>"],
+            ["Como Funciona a Parceria", "DO EXIBICIONISMO AO LUCRO"],
+            ["Aquilo que começou como uma brincadeira pode pagar muito mais", "Aquilo que começou como uma brincadeira pode pagar muito mais que a balada do final de semana!!!"],
+            ["01", "01. Estratégia de Divulgação"],
+            ["02", "02. Plataformas e Consultoria"],
+            ["03", "03. Marketing e Gestão"],
+            ["+25", "<span class='stats-value'><span class='plus-yellow'>+</span> Faturamento</span>"],
+            ["Top 1", "<span class='stats-value'><span class='plus-yellow'>+</span> Assinantes</span>"],
+            ["CRIADORAS GERENCIADAS", "CRESCIMENTO MÉDIO"],
+            ["RANKING DO PRIVACY", "CRESCIMENTO NO 1º MÊS"]
+        ];
 
-                let content = root.innerHTML;
+        function apply() {
+            const walker = document.createTreeWalker(document.getElementById('root') || document.body, NodeFilter.SHOW_TEXT, null, false);
+            let node;
+            while(node = walker.nextNode()) {
+                let text = node.nodeValue;
+                translations.forEach(([old, newVal]) => {
+                    if (text.includes(old) && !text.includes(newVal.substring(0, 5))) {
+                        if (newVal.includes('<')) {
+                            const span = document.createElement('span');
+                            span.innerHTML = newVal;
+                            node.parentNode.replaceChild(span, node);
+                        } else {
+                            node.nodeValue = text.replace(old, newVal);
+                        }
+                    }
+                });
+            }
+        }
 
-                // --- TROCAS DO HERO ---
-                content = content.replace("Do Exibicionismo ao Lucro:", "Quer vender (...e muito) como criadora de conteúdo adulto?");
-                content = content.replace("Transforme suas fotos e vídeos em dinheiro de verdade", "Mas, não tem ideia como?");
-                
-                // --- TROCAS DE IMPACTO ---
-                content = content.replace("Como Funciona a Parceria", "DO EXIBICIONISMO AO LUCRO");
-                
-                // --- TROCAS DOS NÚMEROS (COM O + AMARELO) ---
-                content = content.replace("+25", "<span class='plus-yellow'>+</span> Faturamento");
-                content = content.replace("Top 1", "<span class='plus-yellow'>+</span> Assinantes");
-                content = content.replace("CRIADORAS GERENCIADAS", "CRESCIMENTO MÉDIO");
-                content = content.replace("RANKING DO PRIVACY", "CRESCIMENTO NO 1º MÊS");
+        // Técnica de sincronização suave com o navegador
+        function sync() {
+            apply();
+            requestAnimationFrame(sync);
+        }
 
-                root.innerHTML = content;
-                console.log("Traduções aplicadas com sucesso.");
-            }, 3000);
+        // Inicia a sincronização após o carregamento inicial
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                requestAnimationFrame(sync);
+            }, 1000);
         });
+    })();
     </script>
 </body>
 </html>
