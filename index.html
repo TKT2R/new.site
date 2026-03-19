@@ -3,68 +3,53 @@
 <head>
     <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5"/>
     <title>TKT2Rocket | Agência de Gestão para Criadoras</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Manrope:wght@400;700&display=swap" rel="stylesheet"/>
     <script defer="defer" src="/static/js/main.5b366446.js"></script>
     <link href="/static/css/main.333bd661.css" rel="stylesheet">
+    
     <style>
-        #root h1 { font-family: 'Playfair Display', serif !important; font-weight: 800 !important; }
-        .hero-sub { font-family: 'Manrope', sans-serif !important; line-height: 1.6; display: block; margin-top: 15px; }
-        .stats-label { font-size: 0.75rem; text-transform: uppercase; color: #999; display: block; }
-        .stats-value { font-family: 'Playfair Display', serif; color: #ff3b3b; font-size: 1.5rem; font-weight: 700; display: block; }
-        .plus-yellow { color: #ffcc00 !important; font-weight: 800; margin-right: 2px; }
+        /* 1. RESET DE SEGURANÇA */
+        #root { opacity: 1 !important; visibility: visible !important; }
+
+        /* 2. SUBSTITUIÇÃO VIA CSS (MÉTODO OCULTO) */
+        /* Hero Título */
+        h1:has(span) span, h1 { font-size: 0 !important; }
+        h1:after { 
+            content: "Quer vender (...e muito) como criadora de conteúdo adulto?"; 
+            font-size: 3rem; font-family: 'Playfair Display', serif; display: block; visibility: visible;
+        }
+
+        /* Hero Subtítulo */
+        h1 + p { font-size: 0 !important; }
+        h1 + p:after { 
+            content: "Mas, não tem ideia como? \A\A A TKT2ROCKET 🚀 sabe como te ajudar para voar alto. Uma agência completa para te ajudar a ter liberdade e vender muito mais!"; 
+            font-size: 1.1rem; font-family: 'Manrope', sans-serif; display: block; white-space: pre-wrap; visibility: visible; line-height: 1.6;
+        }
+
+        /* Destaques (Faturamento e Assinantes) */
+        .stats-value { font-size: 0 !important; }
+        .stats-value:before { content: "+"; color: #ffcc00; margin-right: 5px; font-size: 1.5rem; }
+        
+        div:has(> p:contains("+25")) .stats-value:after { content: "Faturamento"; font-size: 1.5rem; color: #ff3b3b; }
+        div:has(> p:contains("Top 1")) .stats-value:after { content: "Assinantes"; font-size: 1.5rem; color: #ff3b3b; }
+
+        /* Esconder o que não deve aparecer */
+        p:contains("no Privacy, HotVips e OnlyFans"), 
+        p:contains("ganhar mais e ter liberdade") { display: none !important; }
+
+        /* Responsividade básica */
+        @media (max-width: 768px) {
+            h1:after { font-size: 2rem; }
+        }
     </style>
 </head>
 <body>
     <div id="root"></div>
     <script>
-    (function() {
-        const translations = [
-            ["Do Exibicionismo ao Lucro:", "Quer vender (...e muito) como criadora de conteúdo adulto?"],
-            ["Transforme suas fotos e vídeos em dinheiro de verdade", "Mas, não tem ideia como?"],
-            ["A TKT2Rocket gerencia seu perfil", "<span class='hero-sub'>A TKT2ROCKET 🚀 sabe como te ajudar para voar alto. <br><br> Uma agência completa para te ajudar a ter liberdade de criação e produção e vender muito mais no Privacy, HotVips e OnlyFans.</span>"],
-            ["Como Funciona a Parceria", "DO EXIBICIONISMO AO LUCRO"],
-            ["Aquilo que começou como uma brincadeira pode pagar muito mais", "Aquilo que começou como uma brincadeira pode pagar muito mais que a balada do final de semana!!!"],
-            ["no Privacy e HotVips — só crescemos se você crescer.", ""], 
-            ["Você sabe que seus vídeos são bons, mas tem poucos assinantes e não sabe como crescer?", "SEUS VÍDEOS SOBEM, MAS SEUS ASSINANTES NÃO? <br> Você posta em plataformas grandes, mas tem poucos assinantes e não sabe como crescer?"],
-            ["01", "01. Estratégia de Divulgação"],
-            ["02", "02. Plataformas e Consultoria"],
-            ["03", "03. Marketing e Gestão"],
-            ["+25", "<span class='stats-value'><span class='plus-yellow'>+</span> Faturamento</span>"],
-            ["CRIADORAS GERENCIADAS", "<span class='stats-label'>CRESCIMENTO MÉDIO</span>"],
-            ["Top 1", "<span class='stats-value'><span class='plus-yellow'>+</span> Assinantes</span>"],
-            ["RANKING DO PRIVACY", "<span class='stats-label'>CRESCIMENTO NO 1º MÊS</span>"],
-            ["Oficial", "<span class='stats-value'>Alcance Global</span>"],
-            ["PARCEIRO HOTVIPS", "<span class='stats-label'>PÓS-TKT2ROCKET</span>"]
-        ];
-
-        function apply() {
-            const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
-            let node;
-            while(node = walker.nextNode()) {
-                let text = node.nodeValue;
-                translations.forEach(([old, newVal]) => {
-                    if (text.includes(old) && old !== "" && !text.includes(newVal.substring(0, 5))) {
-                        if (newVal.includes('<')) {
-                            const span = document.createElement('span');
-                            span.innerHTML = newVal;
-                            node.parentNode.replaceChild(span, node);
-                        } else {
-                            node.nodeValue = text.replace(old, newVal);
-                        }
-                    }
-                });
-            }
-        }
-
-        // Em vez de MutationObserver (que gera loop), usamos intervalos fixos
-        // Isso dá tempo para o navegador "respirar" entre as trocas
-        const interval = setInterval(apply, 1000); 
-        
-        // Para o processo após 10 segundos para economizar bateria/CPU
-        setTimeout(() => clearInterval(interval), 10000);
-
-        apply();
-    })();
+        // Script ultra-leve apenas para garantir que o React não "limpe" o CSS
+        window.addEventListener('load', function() {
+            document.body.style.display = 'block';
+        });
     </script>
 </body>
 </html>
