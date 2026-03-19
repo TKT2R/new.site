@@ -12,9 +12,9 @@
         .stats-label { font-size: 0.75rem; text-transform: uppercase; color: #999; display: block; }
         .stats-value { font-family: 'Playfair Display', serif; color: #ff3b3b; font-size: 1.5rem; font-weight: 700; display: block; }
         .plus-yellow { color: #ffcc00 !important; font-weight: 800; margin-right: 4px; }
-        /* Estilo dos Boxes */
-        .box-number { color: #c5a059 !important; font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; display: block; }
-        .box-title { font-family: 'Playfair Display', serif !important; color: #fff !important; font-size: 1.4rem !important; font-weight: 700; display: block; margin-top: 10px; }
+        /* Estilo dos Boxes Reformulados */
+        .box-number { color: #c5a059 !important; font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; display: block; line-height: 1; }
+        .box-title { font-family: 'Playfair Display', serif !important; color: #fff !important; font-size: 1.3rem !important; font-weight: 700; display: block; margin-top: 8px; line-height: 1.2; }
     </style>
 </head>
 <body>
@@ -28,40 +28,48 @@
             ["Como Funciona a Parceria", "DO EXIBICIONISMO AO LUCRO"],
             ["Somos sócios do seu crescimento", "Somos sócios do seu crescimento. <br> Só crescemos se você crescer."],
             ["Aquilo que começou como uma brincadeira pode pagar muito mais", "Aquilo que começou como uma brincadeira pode pagar muito mais que a balada do final de semana!!!"],
+            // Boxes: Usamos chaves únicas para evitar duplicidade
             ["01", "<span class='box-number'>01</span><span class='box-title'>Estratégia de Divulgação</span>"],
             ["02", "<span class='box-number'>02</span><span class='box-title'>Plataformas e Consultoria</span>"],
             ["03", "<span class='box-number'>03</span><span class='box-title'>Marketing e Gestão</span>"],
             ["+25", "<span class='stats-value'><span class='plus-yellow'>+</span> Faturamento</span>"],
-            ["Top 1", "<span class='stats-value'><span class='plus-yellow'>+</span> Assinantes</span>"],
-            ["CRIADORAS GERENCIADAS", "CRESCIMENTO MÉDIO"],
-            ["RANKING DO PRIVACY", "CRESCIMENTO NO 1º MÊS"]
+            ["Top 1", "<span class='stats-value'><span class='plus-yellow'>+</span> Assinantes</span>"]
         ];
 
         function apply() {
-            const walker = document.createTreeWalker(document.getElementById('root') || document.body, NodeFilter.SHOW_TEXT, null, false);
+            const root = document.getElementById('root');
+            if (!root) return;
+
+            const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
             let node;
+            const toReplace = [];
+
             while(node = walker.nextNode()) {
-                let text = node.nodeValue;
+                let text = node.nodeValue.trim();
                 translations.forEach(([old, newVal]) => {
-                    // SÓ APLICA SE o texto antigo existir E o novo ainda não estiver lá (evita o stack overflow)
-                    if (text.includes(old) && !text.includes(newVal.substring(0, 10))) {
-                        if (newVal.includes('<')) {
-                            const span = document.createElement('span');
-                            span.innerHTML = newVal;
-                            node.parentNode.replaceChild(span, node);
-                        } else {
-                            node.nodeValue = text.replace(old, newVal);
-                        }
+                    // Só agenda a troca se o texto for exatamente igual ao "old" ou contiver a frase do herói
+                    if ((text === old || (old.length > 5 && text.includes(old))) && !node.parentNode.innerHTML.includes('box-number')) {
+                        toReplace.push({node, newVal});
                     }
                 });
             }
+
+            toReplace.forEach(({node, newVal}) => {
+                if (newVal.includes('<')) {
+                    const span = document.createElement('span');
+                    span.innerHTML = newVal;
+                    // Limpa o conteúdo do pai para evitar o "efeito eco" das imagens
+                    node.parentNode.innerHTML = ""; 
+                    node.parentNode.appendChild(span);
+                } else {
+                    node.nodeValue = newVal;
+                }
+            });
         }
 
-        // Intervalo fixo em vez de loop de animação para máxima segurança
-        const timer = setInterval(apply, 1000);
-        // Para o script após 15 segundos para poupar memória
-        setTimeout(() => clearInterval(timer), 15000);
-
+        // Roda em intervalos controlados para não fritar o processador
+        const timer = setInterval(apply, 1500);
+        setTimeout(() => clearInterval(timer), 10000); // Para após 10s
         window.addEventListener('load', apply);
     })();
     </script>
