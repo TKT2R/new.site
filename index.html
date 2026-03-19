@@ -27,11 +27,8 @@
             ["no Privacy e HotVips — só crescemos se você crescer.", ""], 
             ["Você sabe que seus vídeos são bons, mas tem poucos assinantes e não sabe como crescer?", "SEUS VÍDEOS SOBEM, MAS SEUS ASSINANTES NÃO? <br> Você posta em plataformas grandes, mas tem poucos assinantes e não sabe como crescer?"],
             ["01", "01. Estratégia de Divulgação"],
-            ["Gestão de Trocas de Divulgação", ""],
             ["02", "02. Plataformas e Consultoria"],
-            ["Mentoria Completa", ""],
             ["03", "03. Marketing e Gestão"],
-            ["Gestão de Redes Sociais", ""],
             ["+25", "<span class='stats-value'><span class='plus-yellow'>+</span> Faturamento</span>"],
             ["CRIADORAS GERENCIADAS", "<span class='stats-label'>CRESCIMENTO MÉDIO</span>"],
             ["Top 1", "<span class='stats-value'><span class='plus-yellow'>+</span> Assinantes</span>"],
@@ -40,18 +37,13 @@
             ["PARCEIRO HOTVIPS", "<span class='stats-label'>PÓS-TKT2ROCKET</span>"]
         ];
 
-        let isApplying = false;
-
         function apply() {
-            if (isApplying) return; // Se já estiver rodando, ignora para não criar loop
-            isApplying = true;
-            
             const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
             let node;
             while(node = walker.nextNode()) {
                 let text = node.nodeValue;
                 translations.forEach(([old, newVal]) => {
-                    if (text.includes(old) && old !== "" && !text.includes(newVal.substring(0, 10))) {
+                    if (text.includes(old) && old !== "" && !text.includes(newVal.substring(0, 5))) {
                         if (newVal.includes('<')) {
                             const span = document.createElement('span');
                             span.innerHTML = newVal;
@@ -62,16 +54,16 @@
                     }
                 });
             }
-            isApplying = false;
         }
 
-        const observer = new MutationObserver(() => apply());
-        observer.observe(document.body, { childList: true, subtree: true });
+        // Em vez de MutationObserver (que gera loop), usamos intervalos fixos
+        // Isso dá tempo para o navegador "respirar" entre as trocas
+        const interval = setInterval(apply, 1000); 
         
+        // Para o processo após 10 segundos para economizar bateria/CPU
+        setTimeout(() => clearInterval(interval), 10000);
+
         apply();
-        // Disparos de segurança sem loop
-        setTimeout(apply, 500);
-        setTimeout(apply, 2000);
     })();
     </script>
 </body>
