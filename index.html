@@ -6,8 +6,8 @@
     <link href="/static/css/main.333bd661.css" rel="stylesheet">
     <script defer="defer" src="/static/js/main.5b366446.js"></script>
     <style>
-        /* Apenas CSS para as cores, sem scripts para não travar */
-        .plus-yellow { color: #ffcc00 !important; font-weight: bold; }
+        .plus-yellow { color: #ffcc00 !important; font-weight: bold; margin-right: 4px; }
+        .stats-value { color: #ff3b3b !important; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -15,18 +15,30 @@
     <div id="root"></div>
     
     <script>
-        // Este script só roda DEPOIS que tudo estiver carregado e parado
         window.addEventListener('load', function() {
-            console.log('Site carregado. Iniciando troca única.');
+            // Espera 3 segundos para garantir que o React terminou de renderizar tudo
             setTimeout(function() {
-                const el = document.getElementById('root');
-                if (el) {
-                    el.innerHTML = el.innerHTML
-                        .replace(/Do Exibicionismo ao Lucro:/g, "Quer vender (...e muito) como criadora de conteúdo adulto?")
-                        .replace(/\+25/g, "<span class='plus-yellow'>+</span> Faturamento")
-                        .replace(/Top 1/g, "<span class='plus-yellow'>+</span> Assinantes");
-                }
-            }, 5000); // Espera 5 segundos inteiros antes de tocar no código
+                const root = document.getElementById('root');
+                if (!root) return;
+
+                let content = root.innerHTML;
+
+                // --- TROCAS DO HERO ---
+                content = content.replace("Do Exibicionismo ao Lucro:", "Quer vender (...e muito) como criadora de conteúdo adulto?");
+                content = content.replace("Transforme suas fotos e vídeos em dinheiro de verdade", "Mas, não tem ideia como?");
+                
+                // --- TROCAS DE IMPACTO ---
+                content = content.replace("Como Funciona a Parceria", "DO EXIBICIONISMO AO LUCRO");
+                
+                // --- TROCAS DOS NÚMEROS (COM O + AMARELO) ---
+                content = content.replace("+25", "<span class='plus-yellow'>+</span> Faturamento");
+                content = content.replace("Top 1", "<span class='plus-yellow'>+</span> Assinantes");
+                content = content.replace("CRIADORAS GERENCIADAS", "CRESCIMENTO MÉDIO");
+                content = content.replace("RANKING DO PRIVACY", "CRESCIMENTO NO 1º MÊS");
+
+                root.innerHTML = content;
+                console.log("Traduções aplicadas com sucesso.");
+            }, 3000);
         });
     </script>
 </body>
